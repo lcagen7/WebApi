@@ -1,6 +1,8 @@
-﻿using System;
+﻿using JWT;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http.Headers;
 using System.Web.Http;
 
 namespace Web.Api
@@ -13,6 +15,10 @@ namespace Web.Api
 
             // Web API routes
             config.MapHttpAttributeRoutes();
+
+            config.Formatters.JsonFormatter.SupportedMediaTypes.Add(new MediaTypeHeaderValue("text/html"));
+
+            config.Filters.Add(new BearerAuthenticationAttribute());
 
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",
