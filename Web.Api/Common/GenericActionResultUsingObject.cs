@@ -1,17 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Web;
 using System.Web.Http;
 using System.Web.Http.Controllers;
 
 namespace Web.Api.Common
 {
-    public class ApiActionResult : IHttpActionResult
+    public class GenericActionResultUsingObject : IHttpActionResult
     {
         readonly object _value;
         readonly HttpRequestMessage _request;
@@ -20,7 +17,7 @@ namespace Web.Api.Common
         /// </summary>
         /// <param name="value"></param>
         /// <param name="actionContext"></param>
-        public ApiActionResult(object value, HttpActionContext actionContext)
+        public GenericActionResultUsingObject(object value, HttpActionContext actionContext)
         {
             _value = value;
             _request = actionContext.Request;

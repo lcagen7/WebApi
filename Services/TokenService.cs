@@ -14,12 +14,7 @@ namespace Services
             string token = String.Empty;
             if (loginId == "Admin" && password == "Admin")
             {
-                UserInfo ui = new UserInfo();
-                ui.FirstName = "Admin";
-                ui.LastName = "User";
-                ui.LoginId = "adminuser";
-                ui.RoleId = 1;
-                ui.UserId = 1;
+                UserInfo ui = new UserService().GetUser();
                 token=JWT.OAuthToken.Create(ui);
             }
             return token;

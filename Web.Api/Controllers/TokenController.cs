@@ -21,7 +21,7 @@ namespace Web.Api.Controllers
         {
             Services.TokenService ts = new Services.TokenService();
             string settingsValue = ts.GetToken(loginId, password);
-            return new ApiActionResult(settingsValue, ActionContext);
+            return new GenericActionResultUsingObject(settingsValue, ActionContext);
         }
     }
 }

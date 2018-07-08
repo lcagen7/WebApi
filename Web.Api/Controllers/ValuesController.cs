@@ -1,40 +1,59 @@
-﻿using System;
+﻿using Model;
+using Services;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using Web.Api.Common;
 
 namespace Web.Api.Controllers
 {
-    [Authorize]
+    [RoutePrefix("api/values")]
     public class ValuesController : ApiController
     {
-        // GET api/values
+        ResponseHelper responseHealper = new ResponseHelper();
+        //This is Express body example
+        [Authorize]
+        [Route("checkauth")]
+        [HttpGet]
+        public string CheckAuth() => "Token has been checked successfully..";
+
+        [Route("")]
         public IEnumerable<string> Get()
         {
             return new string[] { "value1", "value2" };
         }
 
-        // GET api/values/5
-        public string Get(int id)
+        [Route("HttpResponseMessage")]
+        public HttpResponseMessage GetHttpResponseMessage()
         {
-            return "value";
+            return Request.CreateResponse(HttpStatusCode.OK, responseHealper.GetUser());
         }
 
-        // POST api/values
-        public void Post([FromBody]string value)
+        [Route("GetIHttpActionResult")]
+        public IHttpActionResult GetIHttpActionResult()
         {
+            return Ok(responseHealper.GetUser());
         }
 
-        // PUT api/values/5
-        public void Put(int id, [FromBody]string value)
+        [Route("GetGenericActionResultUsingObject")]
+        public IHttpActionResult GetObjectActionResult()
         {
+            return new GenericActionResultUsingObject(responseHealper.GetUser(), ActionContext);
         }
 
-        // DELETE api/values/5
-        public void Delete(int id)
+        [Route("GetGenericActionResultUsingFunction")]
+        public IHttpActionResult GetGenericActionResultUsingFunction()
         {
+            return new GenericActionResultUsingFunction<UserInfo>(responseHealper.GetUserInfoFunction(), Request);
+        }
+
+        [Route("GetGenericActionResultUsingType")]
+        public IHttpActionResult GetGenericActionResultUsingType()
+        {
+            return new GenericActionResultUsingType<UserInfo>(responseHealper.GetUser(), Request);
         }
     }
 }
