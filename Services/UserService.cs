@@ -20,5 +20,17 @@ namespace Services
                 UserId = 1
             };
         }
+
+        public UserInfo UpdateUser()
+        {
+            return new UserInfo()
+            {
+                FirstName = "FName1Updated",
+                LastName = "LName1Updated",
+                LoginId = "FL1",
+                RoleId = 1,
+                UserId = 1
+            };
+        }
     }
 }

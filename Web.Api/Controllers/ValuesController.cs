@@ -10,7 +10,7 @@ using Web.Api.Common;
 
 namespace Web.Api.Controllers
 {
-    [RoutePrefix("api/values")]
+    [RoutePrefix("values")]
     public class ValuesController : ApiController
     {
         ResponseHelper responseHealper = new ResponseHelper();

@@ -17,5 +17,10 @@ namespace Web.Api.Common
             UserService us = new UserService();
             return us.GetUser;
         }
+        public UserInfo UpdateUser()
+        {
+            UserService us = new UserService();
+            return us.UpdateUser();
+        }
     }
 }
