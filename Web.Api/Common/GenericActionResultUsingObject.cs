@@ -37,7 +37,7 @@ namespace Web.Api.Common
                     return Task.FromResult(_request.CreateResponse(HttpStatusCode.NotFound));
                 }
                 var response = _request.CreateResponse(HttpStatusCode.OK, _value);
-                response.Headers.Add("Access-Control-Allow-Origin", "*");
+                //response.Headers.Add("Access-Control-Allow-Origin", "*");
                 return Task.FromResult(response);
 
             }

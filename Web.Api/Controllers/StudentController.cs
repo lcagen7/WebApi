@@ -6,10 +6,12 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using Web.Api.Common;
+using System.Web.Http.Cors;
 
 namespace Web.Api.Controllers
 {
     [RoutePrefix("Student")]
+    [EnableCors(origins: "http://localhost:4200", headers: "*", methods: "*")]
     public class StudentController : ApiController
     {
         ResponseHelper responseHealper = new ResponseHelper();

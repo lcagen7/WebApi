@@ -8,6 +8,8 @@ namespace Web.Api
     {
         public static void Register(HttpConfiguration config)
         {
+            //Install-Package Microsoft.AspNet.WebApi.Cors
+            config.EnableCors();
             // Web API configuration and services
 
             // Web API routes

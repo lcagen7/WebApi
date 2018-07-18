@@ -41,7 +41,7 @@ namespace Web.Api.Common
             {
                 response=request.CreateResponse(HttpStatusCode.InternalServerError, ex.Message);
             }
-            response.Headers.Add("Access-Control-Allow-Origin", "*");
+            //response.Headers.Add("Access-Control-Allow-Origin", "*");
             return response;
         }
 
