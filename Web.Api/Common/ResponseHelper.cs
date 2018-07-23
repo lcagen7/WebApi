@@ -1,6 +1,7 @@
 ﻿using Model;
 using Services;
 using System;
+using System.Collections.Generic;
 
 namespace Web.Api.Common
 {
@@ -17,10 +18,17 @@ namespace Web.Api.Common
             UserService us = new UserService();
             return us.GetUser;
         }
-        public UserInfo UpdateUser()
+
+        public IList<UserInfo> GetAllUsers()
         {
             UserService us = new UserService();
-            return us.UpdateUser();
+            return us.GetAllUsers();
+        }
+
+        public UserInfo UpdateUser(UserInfo userInfo)
+        {
+            UserService us = new UserService();
+            return us.UpdateUser(userInfo);
         }
     }
 }

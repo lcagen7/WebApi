@@ -10,9 +10,9 @@ using System.Web.Http.Cors;
 
 namespace Web.Api.Controllers
 {
-    [RoutePrefix("Student")]
+    [RoutePrefix("User")]
     [EnableCors(origins: "http://localhost:4200", headers: "*", methods: "*")]
-    public class StudentController : ApiController
+    public class UserController : ApiController
     {
         ResponseHelper responseHealper = new ResponseHelper();
 
@@ -23,11 +23,18 @@ namespace Web.Api.Controllers
             return new GenericActionResultUsingType<UserInfo>(responseHealper.GetUser(), Request);
         }
 
+        [Route("GetAllUsers")]
+        [HttpGet, HttpOptions]
+        public IHttpActionResult GetAllUsers()
+        {
+            return new GenericActionResultUsingType<IList<UserInfo>>(responseHealper.GetAllUsers(), Request);
+        }
+
         [Route("Updateuser")]
         [HttpPut, HttpOptions]
-        public IHttpActionResult UpdatUser()
+        public IHttpActionResult UpdatUser(UserInfo userInfo)
         {
-            return new GenericActionResultUsingType<UserInfo>(responseHealper.UpdateUser(), Request);
+            return new GenericActionResultUsingType<UserInfo>(responseHealper.UpdateUser(userInfo), Request);
         }
     }
 }
