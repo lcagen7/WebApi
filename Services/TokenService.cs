@@ -12,7 +12,7 @@ namespace Services
         public string GetToken(string loginId, string password)
         {
             string token = String.Empty;
-            if (loginId == "Admin" && password == "Admin")
+            if (loginId.ToLower() == "admin" && password == "password")
             {
                 UserInfo ui = new UserService().GetUser();
                 token=JWT.OAuthToken.Create(ui);

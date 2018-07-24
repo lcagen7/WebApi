@@ -2,12 +2,16 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Web;
 using System.Web.Http;
+using System.Web.Http.Cors;
 using Web.Api.Common;
 
 namespace Web.Api.Controllers
 {
+    [EnableCors(origins: "http://localhost:4200", headers: "*", methods: "*")]
+    [RoutePrefix("Token")]
     public class TokenController : ApiController
     {
         /// <summary>
@@ -16,12 +20,20 @@ namespace Web.Api.Controllers
         /// <returns></returns>
         /// GET api/Token/Refresh
         [HttpGet]
-        //[Route("~/api/Token/Get")]
-        public IHttpActionResult Get(string loginId, string password)
+        [Route("Get")]
+        public HttpResponseMessage Get(string loginId, string password)
         {
             Services.TokenService ts = new Services.TokenService();
             string settingsValue = ts.GetToken(loginId, password);
-            return new GenericActionResultUsingObject(settingsValue, ActionContext);
+            if (settingsValue == null || string.IsNullOrEmpty(settingsValue.ToString()))
+            {
+                return Request.CreateResponse(System.Net.HttpStatusCode.Unauthorized, "Invalid username or password.");
+            }
+            else
+            {
+                return Request.CreateResponse(System.Net.HttpStatusCode.OK, settingsValue);
+            }
+            //return new GenericActionResultUsingObject(settingsValue, ActionContext);
         }
     }
 }
