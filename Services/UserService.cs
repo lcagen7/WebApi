@@ -6,13 +6,39 @@ namespace Services
 {
     public class UserService
     {
+        public UserInfo GetUserWithParam(string loginId)
+        {
+            if (loginId.ToLower().Equals("admin"))
+            {
+                return new UserInfo()
+                {
+                    FirstName = "Admin" + " " + Guid.NewGuid().ToString().Substring(8, 6),
+                    LastName = "User" + " " + Guid.NewGuid().ToString().Substring(8, 6),
+                    LoginId = "admin",
+                    RoleId = 1,
+                    UserId = 1
+                };
+            }
+            else
+            {
+                return new UserInfo()
+                {
+                    FirstName = "Normal" + " " + Guid.NewGuid().ToString().Substring(8, 6),
+                    LastName = "User" + " " + Guid.NewGuid().ToString().Substring(8, 6),
+                    LoginId = "user",
+                    RoleId = 2,
+                    UserId = 2
+                };
+            }
+        }
+
         public UserInfo GetUser()
         {
             return new UserInfo()
             {
-                FirstName = "FName1" + " " + Guid.NewGuid().ToString().Substring(8, 6),
-                LastName = "LName1" + " " + Guid.NewGuid().ToString().Substring(8, 6),
-                LoginId = "FL1",
+                FirstName = "Demo" + " " + Guid.NewGuid().ToString().Substring(8, 6),
+                LastName = "User" + " " + Guid.NewGuid().ToString().Substring(8, 6),
+                LoginId = "demo",
                 RoleId = 1,
                 UserId = 1
             };

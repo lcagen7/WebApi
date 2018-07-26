@@ -29,19 +29,25 @@ namespace Web.Api.Controllers
         [Route("HttpResponseMessage")]
         public HttpResponseMessage GetHttpResponseMessage()
         {
-            return Request.CreateResponse(HttpStatusCode.OK, responseHealper.GetUser());
+            return Request.CreateResponse(HttpStatusCode.OK, responseHealper.GetUser("admin"));
         }
 
         [Route("GetIHttpActionResult")]
         public IHttpActionResult GetIHttpActionResult()
         {
-            return Ok(responseHealper.GetUser());
+            return Ok(responseHealper.GetUser("admin"));
         }
 
         [Route("GetGenericActionResultUsingObject")]
         public IHttpActionResult GetObjectActionResult()
         {
-            return new GenericActionResultUsingObject(responseHealper.GetUser(), ActionContext);
+            return new GenericActionResultUsingObject(responseHealper.GetUser("admin"), ActionContext);
+        }
+
+        [Route("GenericActionResultUsingFunctionWithParam")]
+        public IHttpActionResult GetGenericActionResultUsingFunctionWithParam()
+        {
+            return new GenericActionResultUsingFunctionWithParam<UserInfo>(responseHealper.GetUserInfoFunctionWithParam(), Request);
         }
 
         [Route("GetGenericActionResultUsingFunction")]
@@ -53,7 +59,7 @@ namespace Web.Api.Controllers
         [Route("GetGenericActionResultUsingType")]
         public IHttpActionResult GetGenericActionResultUsingType()
         {
-            return new GenericActionResultUsingType<UserInfo>(responseHealper.GetUser(), Request);
+            return new GenericActionResultUsingType<UserInfo>(responseHealper.GetUser("admin"), Request);
         }
     }
 }

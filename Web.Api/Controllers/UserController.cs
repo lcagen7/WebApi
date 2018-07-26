@@ -12,11 +12,11 @@ namespace Web.Api.Controllers
     {
         ResponseHelper responseHealper = new ResponseHelper();
 
-        [Route("GetUser")]
+        [Route("GetUser/{loginid}")]
         [HttpGet]
-        public IHttpActionResult GetUser()
+        public IHttpActionResult GetUser(string loginId)
         {
-            return new GenericActionResultUsingType<UserInfo>(responseHealper.GetUser(), Request);
+            return new GenericActionResultUsingType<UserInfo>(responseHealper.GetUser(loginId), Request);
         }
 
         [Route("GetAllUsers")]

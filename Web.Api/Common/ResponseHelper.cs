@@ -7,16 +7,22 @@ namespace Web.Api.Common
 {
     public class ResponseHelper
     {
-        public UserInfo GetUser()
+        public UserInfo GetUser(string loginId)
         {
             UserService us = new UserService();
-            return us.GetUser();
+            return us.GetUserWithParam(loginId);
         }
 
         public Func<UserInfo> GetUserInfoFunction()
         {
             UserService us = new UserService();
             return us.GetUser;
+        }
+
+        public Func<string, UserInfo> GetUserInfoFunctionWithParam()
+        {
+            UserService us = new UserService();
+            return us.GetUserWithParam;
         }
 
         public IList<UserInfo> GetAllUsers()
